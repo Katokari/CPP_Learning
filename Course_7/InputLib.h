@@ -42,6 +42,13 @@ namespace trans {
 			NewStr += toupper(Str[i]);
 		return NewStr;
 	}
+
+		std::string ToLower(std::string Str) {
+		std::string NewStr = "";
+		for (int i = 0; i < Str.size(); i++)
+			NewStr += tolower(Str[i]);
+		return NewStr;
+	}
 }
 
 namespace random_ {
