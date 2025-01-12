@@ -1,19 +1,20 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
 #include "../InputLib.h"
 
-void PrintFirstLetterOfEachWord(std::string Str) {
+void UpperFirstLetterOfEachWord(std::string& Str) {
 	bool IsFirstLetter = true;
 	for (int i = 0; i < Str.length(); i++) {
 		if (IsFirstLetter && Str[i] != ' ')
-		{
-			printf("%c\t", Str[i]);
-		}
+			Str[i] = toupper(Str[i]);
 		IsFirstLetter = (Str[i] == ' ') ? true : false;
 	}
 }
 
 int main() {
-	PrintFirstLetterOfEachWord(input::ReadStrings("Please enter a string? "));
+	std::string Str = input::ReadStrings("Please enter a string? ");
+	UpperFirstLetterOfEachWord(Str);
+	std::cout << "\n\nString after conversion: \n" << Str;
 	return 0;
 }
