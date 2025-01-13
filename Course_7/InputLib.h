@@ -37,17 +37,15 @@ namespace input {
 
 namespace trans {
 	std::string ToUpper(std::string Str) {
-		std::string NewStr = "";
 		for (int i = 0; i < Str.size(); i++)
-			NewStr += toupper(Str[i]);
-		return NewStr;
+			Str[i] = toupper(Str[i]);
+		return Str;
 	}
 
 		std::string ToLower(std::string Str) {
-		std::string NewStr = "";
 		for (int i = 0; i < Str.size(); i++)
-			NewStr += tolower(Str[i]);
-		return NewStr;
+			Str[i] = tolower(Str[i]);
+		return Str;
 	}
 }
 
