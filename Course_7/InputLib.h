@@ -33,6 +33,13 @@ namespace input {
 		std::getline(std::cin, Str);
 		return Str;
 	}
+
+	char ReadChar(std::string Message) {
+		char Char;
+		std::cout << Message;
+		std::cin >> Char;
+		return Char;
+	}
 }
 
 namespace trans {
