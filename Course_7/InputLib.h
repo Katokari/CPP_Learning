@@ -3,22 +3,34 @@
 #include <iostream>
 #include <string>
 #include <limits>
+#include <sstream>
 
 namespace input {
 	int ReadNumber(std::string Message, std::string ErrMessage) {
 		int Number;
-		std::cout << Message;
-		std::cin >> Number;
-		while (std::cin.fail()) {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::string input;
 
-			std::cout << ErrMessage;
-			std::cin >> Number;
+		while (true) {
+			std::cout << Message;
+			std::getline(std::cin, input);
+
+			std::stringstream ss(input);
+
+			if (ss >> Number) {
+				char remainingChar;
+				if(ss >> remainingChar){
+					std::cout << ErrMessage;
+					continue;
+				}else{
+					return Number;
+				}
+
+			} else {
+				std::cout << ErrMessage;
+			}
 		}
-		return Number;
 	}
-
+	
 	std::string ReadString(std::string Message) {
 		std::string Str;
 		std::cout << Message;
