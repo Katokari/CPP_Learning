@@ -25,5 +25,7 @@ int CountWordsInString(std::string Str) {
 }
 
 int main() {
+    std::string S1 = input::ReadStrings("Please enter a string? \n");
+    std::cout << "Words count in string is " << CountWordsInString(S1);
 	return 0;
 }
