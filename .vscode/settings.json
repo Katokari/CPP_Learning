@@ -54,6 +54,7 @@
         "format": "cpp",
         "span": "cpp",
         "variant": "cpp",
-        "39-joinstring": "cpp"
+        "39-joinstring": "cpp",
+        "fstream": "cpp"
     }
 }

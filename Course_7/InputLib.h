@@ -33,8 +33,11 @@ namespace input {
 	
 	std::string ReadString(std::string Message) {
 		std::string Str;
+
+		if (std::cin.rdbuf()->in_avail() > 0) {
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
 		std::cout << Message;
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::getline(std::cin, Str);
 		return Str;
 	}
