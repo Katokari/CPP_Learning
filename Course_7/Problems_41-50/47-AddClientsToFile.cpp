@@ -31,36 +31,36 @@ stClient ReadClientRecord() {
     return Client;
 }
 
-void AddClientsToFile(std::vector<std::string>& vRecords, std::string Path) {
+void SaveClientsToFile(std::vector<stClient>& vClients, std::string Path) {
     std::fstream File;
     File.open(Path, std::ios::out | std::ios::app);
 
     while (File.is_open())
     {
-        for (std::string& Record : vRecords) {
-            File << Record << "\n";
+        for (stClient& Client : vClients) {
+            File << ConvertRecordToLine(Client, "#//#") << "\n";
         }
 
         File.close();
     }
 }
 
-void ReadClientsToFile() {
-    std::vector<std::string> vRecords;
+void AddClientsToFile() {
+    std::vector<stClient> vClients;
     char Again = 'y';
     do {
         std::cout << "\nAdding New Client:\n\n";
-        vRecords.push_back(ConvertRecordToLine(ReadClientRecord(), "#//#"));
+        vClients.push_back(ReadClientRecord());
         Again = input::ReadChar("\nClient Added Successfully, do you want to add more clients? y/n?");
         if (std::cin.peek() == '\n') {
             std::cin.ignore();
         }
     } while (tolower(Again) == 'y');
 
-    AddClientsToFile(vRecords, "./Records.txt");
+    SaveClientsToFile(vClients, "./Clients.txt");
 }
 
 int main() {
-    ReadClientsToFile();
+    AddClientsToFile();
     return 0;
 }
