@@ -38,7 +38,7 @@ namespace input {
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 		std::cout << Message;
-		std::getline(std::cin, Str);
+		std::getline(std::cin >> std::ws, Str);
 		return Str;
 	}
 
