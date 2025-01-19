@@ -253,3 +253,77 @@ namespace bank {
         Pause();
     }
 }
+
+namespace ext {
+    bool Deposit(std::vector<bank::stClient>& vClients) {
+        std::cout << "----------------------------------------\n";
+        std::cout << "\tDeposit Screen\n";
+        std::cout << "----------------------------------------\n";
+        std::string Account = input::ReadString("Please Enter Account Number? ");
+        std::cout << "\n";
+        char Vertificate = 'y';
+        for (bank::stClient& Client : vClients) {
+            if (Client.AccountNumber == Account) {
+                std::cout << "The following are the client details:\n\n";
+                PrintClient(Client);
+                int DepositAmount = input::ReadNumber("Please enter deposit amount? ", "Please enter a valid number? ");
+                input::ReadChar("\n\nAre you sure you want to perform this transaction? y/n?");
+                if (tolower(Vertificate) == 'y') {
+                    Client.AccountBalance += DepositAmount;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    bool Withdraw(std::vector<bank::stClient>& vClients) {
+        std::cout << "----------------------------------------\n";
+        std::cout << "\tWithdraw Screen\n";
+        std::cout << "----------------------------------------\n";
+        std::string Account = input::ReadString("Please Enter Account Number? ");
+        std::cout << "\n";
+        char Vertificate = 'y';
+        for (bank::stClient& Client : vClients) {
+            if (Client.AccountNumber == Account) {
+                std::cout << "The following are the client details:\n\n";
+                PrintClient(Client);
+                int WithdrawAmount = input::ReadNumberInRange("Please enter the withdraw amount? ", "Amount exceeds the balance, you can withdraw up to : " + std::to_string(Client.AccountBalance), 1, Client.AccountBalance);
+                input::ReadChar("\n\nAre you sure you want to perform this transaction? y/n?");
+                if (tolower(Vertificate) == 'y') {
+                    Client.AccountBalance -= WithdrawAmount;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    void PrintClientBalance(bank::stClient Client)
+    {
+        std::cout << "| " << std::setw(25) << std::left << Client.AccountNumber;
+        std::cout << "| " << std::setw(40) << std::left << Client.Name;
+        std::cout << "| " << std::setw(24) << std::left << Client.AccountBalance;
+    }
+
+    void PrintAllClientsBalance(std::vector<bank::stClient>& vClients)
+    {
+        std::cout << "\n\t\t\t\t\tClient List (" << vClients.size() << ")Client(s).";
+        std::cout << "\n________________________________________________________________________________________________\n" << std::endl;
+        std::cout << "| " << std::left << std::setw(25) << "Accout Number";
+        std::cout << "| " << std::left << std::setw(40) << "Client Name";
+        std::cout << "| " << std::left << std::setw(24) << "Balance";
+        std::cout << "\n________________________________________________________________________________________________\n" << std::endl;
+        
+        for (bank::stClient& Client : vClients)
+        {
+            if (!Client.Delete) {
+                PrintClientBalance(Client);
+                std::cout << std::endl;
+            }
+        }
+
+        std::cout << "\n________________________________________________________________________________________________\n" << std::endl;
+        bank::Pause();
+    }
+}

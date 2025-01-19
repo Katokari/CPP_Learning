@@ -9,10 +9,9 @@ namespace input {
 	int ReadNumber(std::string Message, std::string ErrMessage) {
 		int Number;
 		std::string input;
-
+		std::cout << Message;
 		while (true) {
-			std::cout << Message;
-			std::getline(std::cin, input);
+			std::getline(std::cin >> std::ws, input);
 
 			std::stringstream ss(input);
 
@@ -34,11 +33,10 @@ namespace input {
 	int ReadNumberInRange(std::string Message, std::string ErrMessage, int Min, int Max) {
 		int Number;
 		std::string input;
-
+		std::cout << Message;
+		
 		while (true) {
-			std::cout << Message;
-			std::getline(std::cin, input);
-
+			std::getline(std::cin >> std::ws, input);
 			std::stringstream ss(input);
 
 			if (ss >> Number && Number >= Min && Number <= Max) {
