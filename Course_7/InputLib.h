@@ -30,6 +30,31 @@ namespace input {
 			}
 		}
 	}
+
+	int ReadNumberInRange(std::string Message, std::string ErrMessage, int Min, int Max) {
+		int Number;
+		std::string input;
+
+		while (true) {
+			std::cout << Message;
+			std::getline(std::cin, input);
+
+			std::stringstream ss(input);
+
+			if (ss >> Number && Number >= Min && Number <= Max) {
+				char remainingChar;
+				if(ss >> remainingChar){
+					std::cout << ErrMessage;
+					continue;
+				}else{
+					return Number;
+				}
+
+			} else {
+				std::cout << ErrMessage;
+			}
+		}
+	}
 	
 	std::string ReadString(std::string Message) {
 		std::string Str;
