@@ -3,15 +3,7 @@
 #include "InputLib.h"
 
 bool IsLeapYear(int Year) {
-    if (Year % 4 == 0) {
-        return true;
-    } else if (Year % 100 == 0) {
-        if (Year % 400 == 0) {
-            return true;
-        }
-        return false;
-    }
-    return false;
+    return (Year % 4 == 0 && Year % 100 != 0) || (Year % 400 == 0);
 }
 
 int main()
