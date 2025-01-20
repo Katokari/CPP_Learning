@@ -46,16 +46,18 @@ stDate IncreaseDate(stDate Date) {
 }
 
 int DiffDate1Date2(stDate Date1, stDate Date2) {
+    int Swap = 1;
+    int Days = 0;
     if (IsDate1BeforeDate2(Date1, Date2)) {
         std::swap(Date1, Date2);
     }
-    int Days = 0;
+
     while (IsDate1BeforeDate2(Date2, Date1))
     {
         Days++;
         Date2 = IncreaseDate(Date2);
     }
-    return Days;
+    return Days * Swap;
 }
 
 int main() {
