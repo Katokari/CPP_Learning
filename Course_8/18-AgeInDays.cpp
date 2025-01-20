@@ -32,27 +32,47 @@ int NumberOfDaysInMonth(int Year, int Month) {
     return Days.at(Month-1);
 }
 
-int DaysSinceStart(int Day, int Month, int Year) {
-    int Days = 0;
-    for (int i = 1; i < Month; i++) {
-        Days += NumberOfDaysInMonth(Year, i);
+stDate IncreaseDate(stDate Date) {
+    Date.Day++;
+    if (Date.Day > NumberOfDaysInMonth(Date.Year, Date.Month)) {
+        Date.Day = 1;
+        Date.Month++;
+        if (Date.Month > 12) {
+            Date.Month = 1;
+            Date.Year++;
+        }
     }
-    return Days += Day;
+    return Date;
 }
 
 int DiffDate1Date2(stDate Date1, stDate Date2) {
-    int Year = abs(Date1.Year - Date2.Year);
-    int Days1 = DaysSinceStart(Date1.Day, Date1.Month, Date1.Year);
-    int Days2 = DaysSinceStart(Date2.Day, Date2.Month, Date2.Year);
-    int Days = abs(Days1 - Days2);
-    return Year * 365 + Days;
+    if (IsDate1BeforeDate2(Date1, Date2)) {
+        std::swap(Date1, Date2);
+    }
+    int Days = 0;
+    while (IsDate1BeforeDate2(Date2, Date1))
+    {
+        Days++;
+        Date2 = IncreaseDate(Date2);
+    }
+    return Days;
+}
+
+stDate GetCurrentDate() {
+    time_t t = time(0);
+    tm* now = localtime(&t);
+
+    stDate Date;
+    Date.Year = now->tm_year + 1900;
+    Date.Month = now->tm_mon + 1;
+    Date.Day = now->tm_mday;
+
+    return Date;
 }
 
 int main() {
     stDate Date1 = ReadDate();    
     std::cout << std::endl;
-    stDate Date2 = ReadDate();
-    std::cout << std::endl;
 
-    std::cout << DiffDate1Date2(Date1, Date2);
-}       
+    std::cout << DiffDate1Date2(Date1, GetCurrentDate());
+}
