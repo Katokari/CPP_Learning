@@ -65,6 +65,10 @@ stDate IncreaseDateByOneMonth(stDate Date) {
     } else {
         Date.Month++;
     }
+    short MonthsCurrentDays = NumberOfDaysInMonth(Date.Year, Date.Month);
+    if (Date.Day > Date.Month) {
+        Date.Day = MonthsCurrentDays;
+    }
     return Date;
 }
 
