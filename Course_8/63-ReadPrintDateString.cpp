@@ -61,44 +61,34 @@ stDate ReadDate(std::string Date) {
     return D;
 }
 
-std::string FormatDate(stDate Date, enFormat Format) {
-    switch (Format)
-    {
-    case enFormat::DDMMYYYY:
-        return std::to_string(Date.Day) + "/" + std::to_string(Date.Month) + "/" + std::to_string(Date.Year);
-        break;
-    
-    case enFormat::MMDDYYYY:
-        return std::to_string(Date.Month) + "/" + std::to_string(Date.Day) + "/" + std::to_string(Date.Year);
-        break;
+std::string ReplaceWords(std::string Str, std::string StringToReplace, std::string RepalceTo)
+{
+    short pos = Str.find(StringToReplace);
+    while (pos != std::string::npos)
+        {
+            Str = Str.replace(pos, StringToReplace.length(), RepalceTo);
+            pos = Str.find(StringToReplace);
+        }
+    return Str;
+}
 
-    case enFormat::YYYYDDMM:
-        return std::to_string(Date.Year) + "/" + std::to_string(Date.Day) + "/" + std::to_string(Date.Month);
-        break;
-
-    case enFormat::DashDDMMYYYY:
-        return std::to_string(Date.Day) + "-" + std::to_string(Date.Month) + "-" + std::to_string(Date.Year);
-        break;
-
-    case enFormat::DashMMDDYYYY:
-        return std::to_string(Date.Month) + "-" + std::to_string(Date.Day) + "-" + std::to_string(Date.Year);
-        break;
-
-    case enFormat::Detailed:
-        return "Day:" + std::to_string(Date.Day) + ", Month:" + std::to_string(Date.Month) + ", Year:" + std::to_string(Date.Year);
-        break;
-    }
+std::string FormatDate(stDate Date, std::string Format) {
+    std::string Formated = "";
+    Formated = ReplaceWords(Format, "DD", std::to_string(Date.Day));
+    Formated = ReplaceWords(Formated, "MM", std::to_string(Date.Month));
+    Formated = ReplaceWords(Formated, "YYYY", std::to_string(Date.Year));
+    return Formated;
 }
 
 int main() {
     stDate Date = ReadDate(input::ReadString("Please enter a date DD/MM/YYYY? "));
 
-    std::cout << FormatDate(Date, enFormat::DDMMYYYY) << std::endl;
-    std::cout << FormatDate(Date, enFormat::MMDDYYYY) << std::endl;
-    std::cout << FormatDate(Date, enFormat::YYYYDDMM) << std::endl;
-    std::cout << FormatDate(Date, enFormat::DashDDMMYYYY) << std::endl;
-    std::cout << FormatDate(Date, enFormat::DashMMDDYYYY) << std::endl;
-    std::cout << FormatDate(Date, enFormat::Detailed) << std::endl;
+    std::cout << FormatDate(Date, "DD/MM/YYYY") << std::endl;
+    std::cout << FormatDate(Date, "MM/DD/YYYY") << std::endl;
+    std::cout << FormatDate(Date, "YYYY/DD/MM") << std::endl;
+    std::cout << FormatDate(Date, "DD-MM-YYYY") << std::endl;
+    std::cout << FormatDate(Date, "MM-DD-YYYY") << std::endl;
+    std::cout << FormatDate(Date, "Day:DD, Month:MM, Year:YYYY") << std::endl;
 
     return 0;
 }
