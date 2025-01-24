@@ -160,7 +160,7 @@ class clsDeveloper : public clsEmbloyee {
         _mainProgrammingLanguage = mainProgrammingLanguage;
     }
 
-    std::string getDepartment() {
+    std::string getMainProgrammingLanguage() {
         return _mainProgrammingLanguage;
     }
 
