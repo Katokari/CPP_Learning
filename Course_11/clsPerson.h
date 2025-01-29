@@ -3,7 +3,6 @@
 
 class clsPerson {
     private:
-    int _id;
     std::string _firstName;
     std::string _lastName;
     std::string _email;
@@ -12,16 +11,11 @@ class clsPerson {
     public:
     clsPerson() {}
 
-    clsPerson(int id, std::string firstName, std::string lastName, std::string email, std::string phone) {
-        _id = id;
+    clsPerson(std::string firstName, std::string lastName, std::string email, std::string phone) {
         _firstName = firstName;
         _lastName = lastName;
         _email = email;
         _phone = phone;
-    }
-
-    int getId() {
-        return _id;
     }
 
     void setFirstName(std::string firstName) {
@@ -63,7 +57,6 @@ class clsPerson {
     void print() {
         std::cout << "\nInfo:\n";
         std::cout << "\n______________________\n";
-        std::cout << "ID       : " << _id << "\n";
         std::cout << "FirstName: " << _firstName << "\n";
         std::cout << "LastName : " << _lastName << "\n";
         std::cout << "FullName : " << getFullName() << "\n";

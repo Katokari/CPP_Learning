@@ -3,6 +3,8 @@
 #include "clsString.h"
 #include <vector>
 #include <iomanip>
+#include <string>
+#include <cstdio>
 
 class clsDate {
 private:
@@ -794,4 +796,24 @@ public:
     enCompare CompareDate(clsDate Date2) {
         return CompareDate(*this, Date2);
     }
+
+	static std::string GetSystemDateTimeString()
+	{
+		//system datetime string
+		time_t t = time(0);
+		tm* now = localtime(&t);
+
+		short Day, Month, Year,Hour,Minute,Second;
+
+		Year = now->tm_year + 1900;
+		Month = now->tm_mon + 1;
+		Day = now->tm_mday;
+		Hour = now->tm_hour;
+		Minute = now->tm_min;
+		Second = now->tm_sec;
+
+		return (std::to_string(Day) + "/" + std::to_string(Month) + "/" + std::to_string(Year) + " - " + 
+        std::to_string(Hour) + ":" + std::to_string(Minute) + ":" + std::to_string(Second));
+
+	}
 };

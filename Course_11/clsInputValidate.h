@@ -5,31 +5,9 @@
 #include "clsUtil.h"
 #include "clsPeriod.h"
 
+template <typename T>
 class clsInputValidate {
-    static bool IsNumberBetween(short Num, short From, short To) {
-        if (Num <= To && Num >= From)
-            return true;
-        return false;
-    }
-
-    static bool IsNumberBetween(int Num, int From, int To) {
-        if (Num <= To && Num >= From)
-            return true;
-        return false;
-    }
-
-    static bool IsNumberBetween(float Num, float From, float To) {
-        if (Num <= To && Num >= From)
-            return true;
-        return false;
-    }
-
-    static bool IsNumberBetween(double Num, double From, double To) {
-        if (Num <= To && Num >= From)
-            return true;
-        return false;
-    }
-
+public:
     static bool IsDateBetween(clsDate Date, clsDate Date1, clsDate Date2) {
         if (clsDate::IsDate1BeforeDate2(Date1, Date2)) {
             clsUtil::Swap(Date1, Date2);
@@ -38,10 +16,15 @@ class clsInputValidate {
         return Period.IsDateWithinPeriod(Date);
     }
 
-	static int ReadIntNumber(std::string Message, std::string ErrMessage) {
-		int Number;
+	static bool IsNumberBetween(T Num, T From, T To) {
+        if (Num <= To && Num >= From)
+            return true;
+        return false;
+	}
+
+	static T ReadNumber(std::string ErrMessage) {
+		T Number;
 		std::string input;
-		std::cout << Message;
 		while (true) {
 			std::getline(std::cin >> std::ws, input);
 
@@ -62,10 +45,9 @@ class clsInputValidate {
 		}
 	}
 
-	static int ReadIntNumberBetween(std::string Message, std::string ErrMessage, int Min, int Max) {
-		int Number;
+	static T ReadNumberBetween(std::string ErrMessage, T Min, T Max) {
+		T Number;
 		std::string input;
-		std::cout << Message;
 		
 		while (true) {
 			std::getline(std::cin >> std::ws, input);
@@ -86,56 +68,13 @@ class clsInputValidate {
 		}
 	}
 
-	static double ReadDblNumber(std::string Message, std::string ErrMessage) {
-		double Number;
+	static std::string ReadString() {
 		std::string input;
-		std::cout << Message;
-		while (true) {
-			std::getline(std::cin >> std::ws, input);
-
-			std::stringstream ss(input);
-
-			if (ss >> Number) {
-				char remainingChar;
-				if(ss >> remainingChar){
-					std::cout << ErrMessage;
-					continue;
-				}else{
-					return Number;
-				}
-
-			} else {
-				std::cout << ErrMessage;
-			}
-		}
-	}
-
-	static int ReadDblNumberBetween(std::string Message, std::string ErrMessage, double Min, double Max) {
-		double Number;
-		std::string input;
-		std::cout << Message;
-		
-		while (true) {
-			std::getline(std::cin >> std::ws, input);
-			std::stringstream ss(input);
-
-			if (ss >> Number && Number >= Min && Number <= Max) {
-				char remainingChar;
-				if(ss >> remainingChar){
-					std::cout << ErrMessage;
-					continue;
-				}else{
-					return Number;
-				}
-
-			} else {
-				std::cout << ErrMessage;
-			}
-		}
+		std::getline(std::cin >> std::ws, input);
+		return input;
 	}
 
     static bool IsValidDate(clsDate Date) {
         return clsDate::IsValidDate(Date);
     }
-
 };
