@@ -28,6 +28,34 @@ public:
     }
 
     void pop() {
-        _MyList.DeleteLastNode();
+        _MyList.DeleteFirstNode();
+    }
+
+    T GetItem(int Index) {
+        return _MyList.GetItem(Index);
+    }
+
+    void Reverse() {
+        _MyList.Reverse();
+    }
+
+    void UpdateItem(int Index, T NewValue) {
+        _MyList.UpdateItem(Index, NewValue);
+    }
+
+    void InsertAfter(int Index, T value) {
+        _MyList.InsertAfter(Index, value);
+    }
+
+    void InsertAtFront(T value) {
+        _MyList.InsertAtBeginning(value);
+    }
+
+    void InsertAtBack(T value) {
+        _MyList.InsertAtEnd(value);
+    }
+
+    void Clear() {
+        _MyList.Clear();
     }
 };
