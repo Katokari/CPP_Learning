@@ -7,6 +7,7 @@ using namespace std;
 template <class T> class clsDynamicArray {
 protected:
     int _Size = 0;
+    T* _TempArray;
 
 public:
     T* Array;
@@ -40,5 +41,27 @@ public:
         for (int i = 0; i < _Size; i++) {
             cout << Array[i] << " ";
         }
+    }
+
+    void Resize(int NewSize)
+    { 
+        if (NewSize < 0)
+            NewSize = 0;
+
+        _TempArray = new T[NewSize];
+
+        if (NewSize < _Size)
+            _Size = NewSize;
+
+        for (int i = 0; i < _Size; i++)
+        {
+            _TempArray[i] = Array[i];
+        }
+
+        _Size = NewSize;
+
+        delete[] Array;
+        Array = _TempArray;
+      
     }
 };
