@@ -78,10 +78,9 @@ public:
     }
 
     void Clear() {
+        delete[] Array; // Free existing memory
         _Size = 0;
-        _TempArray = new T[0];
-        delete[] Array;
-        Array = _TempArray;
+        Array = new T[0]; // Assign valid empty array
     }
 
     void DeleteItemAt(int Index) {
@@ -130,19 +129,20 @@ public:
     }
 
     void InsertAt(int Index, T value) {
-        if (_Index < 0; Index >= _Size) return;
-
+        if (Index < 0 || Index > _Size) return;
+        int OriginalSize = _Size;
         _Size++;
-        _TempArray = new T[_Size];
+        T* TempArray = new T[_Size];
         for (int i = 0; i < Index; i++) {
-            _TempArray[i] = Array[i];
+            TempArray[i] = Array[i];
         }
-        _TempArray[Index] = value;
-        for (int i = Index; i < _Size-1; i++) {
-            _TempArray[i+1] = Array[i];
+        TempArray[Index] = value;
+        
+        for (int i = Index; i < OriginalSize; i++) {
+            TempArray[i + 1] = Array[i];
         }
         delete[] Array;
-        Array = _TempArray;
+        Array = TempArray;
     }
 
     void InsertAtBeginning(T value) {
@@ -157,12 +157,11 @@ public:
     }
 
     void InsertAfter(int Index, T value) {
-        if (Index >= _Size) {
-            InsertAt(_Size-1, value);
+        if (Index < 0 || Index >= _Size) {
+            InsertAtEnd(value);
         } else {
-            InsertAt(Index+1, value);
+            InsertAt(Index + 1, value);
         }
-
     }
 
     void InsertAtEnd(T value) {
