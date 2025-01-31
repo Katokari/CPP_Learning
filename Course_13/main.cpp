@@ -2,68 +2,57 @@
 //Mohammed Abu-Hadhoud
 
 #include <iostream>
-#include "clsMyStackArr.h"
+#include "clsMyString.h"
 
 using namespace std;
 
 int main()
 {
-
-    clsMyStackArr <int> MyStack;
-
-    MyStack.push(10);
-    MyStack.push(20);
-    MyStack.push(30);
-    MyStack.push(40);
-    MyStack.push(50);
-
-
-    cout << "\nStack: \n";
-    MyStack.Print();
-
-    cout << "\nStack Size: " << MyStack.Size();
-    cout << "\nStack Top: " << MyStack.Top();
-    cout << "\nStack Bottom: " << MyStack.Bottom();
-
-    MyStack.pop();
-
-    cout << "\n\nStack after pop() : \n";
-    MyStack.Print();
-
- 
-    cout << "\n\n Item(2) : " << MyStack.GetItem(2);
-
    
-    MyStack.Reverse();
-    cout << "\n\nStack after reverse() : \n";
-    MyStack.Print();
+    cout << "\n\n\t\t\t\t\t\t Undo/Redo Project\n\n";
 
-   
-    MyStack.UpdateItem(2, 600);
-    cout << "\n\nStack after updating Item(2) to 600 : \n";
-    MyStack.Print();
+    clsMyString S1;
 
+    cout << "\nS1  = " << S1.GetValue() << "\n"; 
+
+    S1.SetValue("Mohammed");
   
-    MyStack.InsertAfter(2, 800);
-    cout << "\n\nStack after Inserting 800 after Item(2) : \n";
-    MyStack.Print();
+    cout << "S1  = " << S1.GetValue() << "\n";
 
+    S1.SetValue("Mohammed2");
 
-   
-    MyStack.InsertAtFront(1000);
-    cout << "\n\nStack after Inserting 1000 at top: \n";
-    MyStack.Print();
+    cout << "S1  = " << S1.GetValue() << "\n";
 
+    S1.SetValue("Mohammed3");
+
+    cout << "S1  = " << S1.GetValue() << "\n";
+
+    cout << "\n\nUndo: ";
+    cout << "\n__________\n";
+
+    S1.Undo();
+    cout << "\nS1  after undo = " << S1.GetValue() << "\n";
     
-    MyStack.InsertAtBack(2000);
-    cout << "\n\nStack after Inserting 2000 at bottom: \n";
-    MyStack.Print();
+    S1.Undo();
+    cout << "S1  after undo = " << S1.GetValue() << "\n";
 
-  
-    MyStack.Clear();
-    cout << "\n\nStack after Clear(): \n";
-    MyStack.Print();
+    S1.Undo();
+    cout << "S1  after undo = " << S1.GetValue() << "\n";
+
+    cout << "\n\nRedo: ";
+    cout << "\n__________\n";
+
+    S1.Redo();
+    cout << "\nS1  after Redo = " << S1.GetValue() << "\n";
+
+    S1.Redo();
+    cout << "S1  after Redo = " << S1.GetValue() << "\n";
+
+    S1.Redo();
+    cout << "S1  after Redo = " << S1.GetValue() << "\n";
 
     system("pause>0");
 
+    return 0;
 }
+
