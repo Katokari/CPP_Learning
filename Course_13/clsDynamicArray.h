@@ -96,7 +96,7 @@ public:
             _TempArray[i] = Array[i];
         }
 
-        for (int i = Index+1; i < _Size +1; i++) {
+        for (int i = Index+1; i < _Size; i++) {
             _TempArray[i-1] = Array[i];
         }
 
@@ -104,5 +104,13 @@ public:
 
         delete[] Array;
         Array = _TempArray;
+    }
+
+    void DeleteFirstItem() {
+        DeleteItemAt(0);
+    }
+
+    void DeleteLastItem() {
+        DeleteItemAt(_Size-1);
     }
 };
