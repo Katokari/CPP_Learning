@@ -128,4 +128,20 @@ public:
         DeleteItemAt(Index);
         return true;
     }
+
+    void InsertAt(int Index, T value) {
+        if (_Index < 0; Index >= _Size) return;
+
+        _Size++;
+        _TempArray = new T[_Size];
+        for (int i = 0; i < Index; i++) {
+            _TempArray[i] = Array[i];
+        }
+        _TempArray[Index] = value;
+        for (int i = Index+1; i < _Size-1) {
+            _TempArray[i] = Array[i-1];
+        }
+        delete[] Array;
+        Array = _TempArray;
+    }
 };
