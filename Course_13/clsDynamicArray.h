@@ -62,6 +62,47 @@ public:
 
         delete[] Array;
         Array = _TempArray;
-      
+    }
+
+    T GetItem(int Index) {
+        return Array[Index];
+    }
+
+    void Reverse() {
+        _TempArray = new T[_Size];
+        for (int i = 0; i < _Size; i++)
+            _TempArray[_Size-i-1] = Array[i];
+        
+        delete[] Array;
+        Array = _TempArray;
+    }
+
+    void Clear() {
+        _Size = 0;
+        _TempArray = new T[0];
+        delete[] Array;
+        Array = _TempArray;
+    }
+
+    void DeleteItemAt(int Index) {
+        if (_Size == 0) return;
+
+        if (Index < 0 || Index >= _Size)
+            return;
+
+        _TempArray = new T[_Size-1];
+        for (int i = 0; i < Index; i++)
+        {
+            _TempArray[i] = Array[i];
+        }
+
+        for (int i = Index+1; i < _Size +1; i++) {
+            _TempArray[i-1] = Array[i];
+        }
+
+        _Size = _Size -1;
+
+        delete[] Array;
+        Array = _TempArray;
     }
 };
