@@ -138,10 +138,34 @@ public:
             _TempArray[i] = Array[i];
         }
         _TempArray[Index] = value;
-        for (int i = Index+1; i < _Size-1) {
-            _TempArray[i] = Array[i-1];
+        for (int i = Index; i < _Size-1; i++) {
+            _TempArray[i+1] = Array[i];
         }
         delete[] Array;
         Array = _TempArray;
     }
-};
+
+    void InsertAtBeginning(T value) {
+        InsertAt(0, value);
+    }
+
+    void InsertBefore(int Index, T value) {
+        if (Index < 1)
+            InsertAt(0, value);
+        else
+            InsertAt(Index-1, value);
+    }
+
+    void InsertAfter(int Index, T value) {
+        if (Index >= _Size) {
+            InsertAt(_Size-1, value);
+        } else {
+            InsertAt(Index+1, value);
+        }
+
+    }
+
+    void InsertAtEnd(T value) {
+        InsertAt(_Size, value);
+    }
+};  
